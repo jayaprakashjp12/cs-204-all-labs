@@ -37,19 +37,19 @@ queue<int>q2;
                 for(int i=1;i<=n;i++)
                     {
                         if(col[i]==0){q1.push(i); 
-                        count++;col[i]=1;break;}
+                        col[i]=1;break;}
                     }
                 
             }
      
       while(!q1.empty())
             {
-             int temp=q1.front();q1.pop(); 
+             int temp=q1.front();q1.pop();count++;cout<<temp<<" "; 
              for(int i=1;i<=n;i++)
                 {
                     if(temp!=i&&a[temp][i]==1)
                     { //cout<<i<<":edge wiht temp  ";
-                     if(col[i]==0){col[i]=(col[temp]==1)?2:1;count++;q2.push(i);}
+                     if(col[i]==0){col[i]=(col[temp]==1)?2:1;q2.push(i);}
                      else if(col[i]==col[temp]){cout<<"NO"; return 0;}    
                         
                         
@@ -60,7 +60,7 @@ queue<int>q2;
             }     
      if(q2.empty())
         {   while(!q1.empty())
-            {int temp=q1.front();q1.pop();
+            {int temp=q1.front();q1.pop();count++;cout<<temp<<" "; 
             for (int i=1;i<=n;i++)
                 { 
                      if(temp!=i&&a[temp][i]==1)
@@ -76,11 +76,9 @@ queue<int>q2;
      swap(q1,q2);
      
      
-     }while(!q1.empty());
+     }while( count!=n);
 
  cout<<"YES";
  
 
 }
-    
-    
