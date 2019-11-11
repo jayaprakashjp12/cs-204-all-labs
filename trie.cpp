@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+  #include<bits/stdc++.h>
 using namespace std;
 #define k 26
   struct trie
@@ -17,7 +17,7 @@ struct  trie* createnode(void)
     }
     return temp;
 }
-struct trie* insert(struct trie* root,string key)
+void insert(struct trie* root,string key)
 {  struct trie* crawl=root;
 
   for (int i=0;i<key.length();i++)
@@ -29,7 +29,7 @@ struct trie* insert(struct trie* root,string key)
   crawl=crawl->children[index];
   }
   crawl->isendofword=true;
-}
+ }
 bool search(struct trie* root,string key)
 {
   struct trie*temp=root;
@@ -51,29 +51,55 @@ bool search(struct trie* root,string key)
 
 
 }
+bool palin(string a)
+{
+    int n=a.length();
+    for(int i=0;i<n/2;i++)
+    {
+        if(a[i]!=a[n-i-1])
+        {
+            return false;
+        }
+    }
+    return true;
+}
 int main()
 {
-  string keys[] = {"the", "a", "there",
-                     "answer", "any", "by",
-                      "bye", "their" };
-     int n = sizeof(keys)/sizeof(keys[0]);
- string keys2[n];
+  int n;
+  cin>>n;
+  string keys[n];
+  for (int i = 0; i < n; i++)
+    {
+        cin>>keys[i];      
+
+    }
+
 
  struct trie *root =  createnode();
 
+
      // Construct trie
 for (int i = 0; i < n; i++)
-{
-         insert(root, keys[i]);
-
-}
+    {
+        insert(root,keys[i]);
+    }
+ 
 for (int i = 0; i < n; i++)
 {
-if(  search(root,keys[i]))
-{
-  cout<<"yes";
-  return 0;
-}
+    string temp=keys[i];
+    cout<<temp<<" ";
+    reverse( temp.begin(),temp.end() );
+    cout<<temp<< " ";
+    if(!palin(temp))
+    { 
+        //cout<<i<<" ";
+    if(  search(root,temp))
+    {
+    cout<<"yes";
+    return 0;
+    }
+    }
 }
 cout<<"NO";
+
 }
